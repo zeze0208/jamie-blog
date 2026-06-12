@@ -16,10 +16,10 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
 
       - name: Install sync dependencies
-        run: npm install @notionhq/client notion-to-md
+        run: npm install @notionhq/client@2 notion-to-md@3
 
       - name: Run Notion sync
         env:
