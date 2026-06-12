@@ -2,7 +2,7 @@ module.exports = {
   title: `Jamie Blog`, // TODO: 블로그 이름 나중에 변경
   description: `일하는 과정을 기록하는 Jamie의 블로그`,
   language: `ko`, // `ko`, `en` => currently support versions for Korean and English
-  siteUrl: `https://jamie-blog.netlify.app`, // 도메인 구매 후 실제 URL로 변경
+  siteUrl: `https://jamieelog.netlify.app`, // 도메인 구매 후 실제 URL로 변경
   ogImage: `/og-image.png`, // Path to your in the 'static' folder
   comments: {
     utterances: {
