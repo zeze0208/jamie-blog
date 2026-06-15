@@ -1,0 +1,50 @@
+.about-wrapper {
+  max-width: 680px;
+  margin: 60px auto;
+  padding: 0 20px;
+
+  .about-header {
+    margin-bottom: 40px;
+
+    .about-name {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .about-role {
+      font-size: 1.1rem;
+      color: var(--text-secondary-color, #888);
+      font-weight: 500;
+    }
+  }
+
+  .about-section {
+    margin-bottom: 32px;
+
+    p {
+      font-size: 1rem;
+      line-height: 1.9;
+      margin-bottom: 16px;
+      color: var(--text-color);
+    }
+  }
+
+  .about-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      background-color: var(--tag-background-color, #f0f0f0);
+      color: var(--text-color);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+  }
+}

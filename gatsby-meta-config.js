@@ -13,8 +13,8 @@ module.exports = {
   author: {
     name: `Jamie`,
     bio: {
-      role: `Product Manager`,
-      description: ['일하는 과정을 기록하는', '기획과 운영을 좋아하는', 'AI를 탐구하는'],
+      role: ``,
+      description: ['일하는 과정을 기록하는'],
       thumbnail: '', // 프로필 이미지 추가 시 파일명 입력 (assets/ 폴더에 넣기)
     },
     social: {

@@ -5,7 +5,7 @@ import Layout from '../layout';
 import Seo from '../components/seo';
 import Post from '../models/post';
 import CategoryPageHeader from '../components/category-page-header';
-import PostTabs from '../components/post-tabs';
+import PostTabs, { CATEGORY_LABELS, CATEGORY_DESCRIPTIONS } from '../components/post-tabs';
 
 function CategoryTemplate({ pageContext }) {
   const { edges, currentCategory } = pageContext;
@@ -24,10 +24,21 @@ function CategoryTemplate({ pageContext }) {
     [categories],
   );
 
+  const title = CATEGORY_LABELS[currentCategory] || currentCategory;
+  const description = CATEGORY_DESCRIPTIONS[currentCategory];
+
   return (
     <Layout>
       <Seo title="Posts" />
-      <CategoryPageHeader title={categories[currentTabIndex]} subtitle={`${posts.length} posts`} />
+      <CategoryPageHeader
+        title={title}
+        subtitle={description || `${posts.length} posts`}
+      />
+      {description && (
+        <p style={{ textAlign: 'center', color: 'var(--text-secondary-color, #888)', marginBottom: '8px', fontSize: '0.95rem' }}>
+          {posts.length} posts
+        </p>
+      )}
       <PostTabs
         tabIndex={currentTabIndex}
         onChange={onTabIndexChange}

@@ -36,9 +36,8 @@ function PageHeader({ siteTitle }) {
               <Link className="link" to="/about">
                 about
               </Link>
-              <Link className="link" to="/posts">
-                posts
-              </Link>
+              {/* posts 메뉴 숨김 처리 — 복원하려면 아래 주석 해제 */}
+              {/* <Link className="link" to="/posts">posts</Link> */}
               <PostSearch
                 posts={data.allMarkdownRemark.edges.map(({ node }) => new Post(node, true))}
               />
