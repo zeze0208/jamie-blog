@@ -84,9 +84,30 @@ categories: ${category}
     // content/{slug}/index.md 저장
     const dir = path.join('content', slug);
     fs.mkdirSync(dir, { recursive: true });
-    fs.writeFileSync(path.join(dir, 'index.md'), frontmatter + mdContent.parent);
+    const tocBlock = '\n\n```toc\n```\n';
+    fs.writeFileSync(path.join(dir, 'index.md'), frontmatter + mdContent.parent + tocBlock);
 
     console.log(`📝 완료: [${category}] ${title} → content/${slug}/index.md`);
+  }
+
+  // 노션에 없는 폴더 삭제 (Draft/삭제된 글 반영)
+  const publishedSlugs = new Set(response.results.map((page) => {
+    const slugRaw = page.properties.Slug?.rich_text?.[0]?.plain_text;
+    const title = page.properties.Title?.title?.[0]?.plain_text || 'Untitled';
+    return slugRaw
+      ? slugRaw.trim()
+      : title.toLowerCase().replace(/[^a-z0-9가-힣\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').trim();
+  }));
+
+  const contentDir = path.join('content');
+  if (fs.existsSync(contentDir)) {
+    const existingFolders = fs.readdirSync(contentDir);
+    for (const folder of existingFolders) {
+      if (!publishedSlugs.has(folder)) {
+        fs.rmSync(path.join(contentDir, folder), { recursive: true, force: true });
+        console.log(`🗑️  삭제: content/${folder} (노션에서 제거되거나 비공개 처리됨)`);
+      }
+    }
   }
 
   console.log('\n🎉 동기화 완료!');
