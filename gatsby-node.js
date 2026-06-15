@@ -26,7 +26,9 @@ const createBlogPages = ({ createPage, results }) => {
 
 const createPostsPages = ({ createPage, results }) => {
   const categoryTemplate = require.resolve(`./src/templates/category-template.js`);
-  const categorySet = new Set(['All']);
+  // 글 유무와 관계없이 항상 노출할 고정 카테고리
+  const FIXED_CATEGORIES = ['All', 'featured', 'trend', 'cto', 'planning', 'etc'];
+  const categorySet = new Set(FIXED_CATEGORIES);
   const { edges } = results.data.allMarkdownRemark;
 
   edges.forEach(({ node }) => {

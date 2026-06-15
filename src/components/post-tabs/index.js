@@ -13,7 +13,7 @@ export const CATEGORY_LABELS = {
 
 export const CATEGORY_DESCRIPTIONS = {
   trend: '읽어볼만한 인사이트와 트렌드 기록',
-  cto: '문과 출신 CSO이지만 개발과 데이터를 배우고 있는 CTO지망생. 바이브코딩, 데이터분석 등 개발 관련한 경험담 기록',
+  cto: 'IT서비스를 만들어가는 비개발자로 일하며, 바이브코딩과 데이터분석을 배워가는 과정을 기록합니다.',
   planning: '사업기획, 서비스기획, 행사기획.. 온오프라인 기획과 관련한 업무 경험 기록',
 };
 
