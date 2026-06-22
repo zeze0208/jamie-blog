@@ -13,6 +13,61 @@ const { Client } = require('@notionhq/client');
 const { NotionToMarkdown } = require('notion-to-md');
 const fs = require('fs');
 const path = require('path');
+const https = require('https');
+const http = require('http');
+const { URL } = require('url');
+
+// 이미지 다운로드 함수
+function downloadImage(imageUrl, destPath) {
+  return new Promise((resolve, reject) => {
+    const url = new URL(imageUrl);
+    const client = url.protocol === 'https:' ? https : http;
+    const file = fs.createWriteStream(destPath);
+    client.get(imageUrl, (res) => {
+      if (res.statusCode === 301 || res.statusCode === 302) {
+        file.close();
+        fs.unlinkSync(destPath);
+        return downloadImage(res.headers.location, destPath).then(resolve).catch(reject);
+      }
+      res.pipe(file);
+      file.on('finish', () => file.close(resolve));
+    }).on('error', (err) => {
+      fs.unlinkSync(destPath);
+      reject(err);
+    });
+  });
+}
+
+// 마크다운에서 이미지 URL 추출 후 로컬 저장, 경로 교체
+async function localizeImages(markdown, dir) {
+  const imageRegex = /!\[([^\]]*)\]\((https?:\/\/[^)]+)\)/g;
+  const downloads = [];
+  let match;
+
+  while ((match = imageRegex.exec(markdown)) !== null) {
+    const [full, alt, imageUrl] = match;
+    try {
+      const urlObj = new URL(imageUrl);
+      const ext = path.extname(urlObj.pathname).split('?')[0] || '.png';
+      const filename = `image-${downloads.length + 1}${ext}`;
+      downloads.push({ full, alt, imageUrl, filename });
+    } catch {
+      // 유효하지 않은 URL은 스킵
+    }
+  }
+
+  for (const item of downloads) {
+    const destPath = path.join(dir, item.filename);
+    try {
+      await downloadImage(item.imageUrl, destPath);
+      markdown = markdown.replace(item.full, `![${item.alt}](./${item.filename})`);
+    } catch (err) {
+      console.warn(`  ⚠️  이미지 다운로드 실패 (원본 URL 유지): ${item.imageUrl.slice(0, 60)}...`);
+    }
+  }
+
+  return markdown;
+}
 
 const notion = new Client({ auth: process.env.NOTION_TOKEN });
 const n2m = new NotionToMarkdown({ notionClient: notion });
@@ -84,8 +139,12 @@ categories: ${category}
     // content/{slug}/index.md 저장
     const dir = path.join('content', slug);
     fs.mkdirSync(dir, { recursive: true });
+
+    // 이미지 다운로드 및 경로 교체
+    const localizedContent = await localizeImages(mdContent.parent, dir);
+
     const tocBlock = '\n\n```toc\n```\n';
-    fs.writeFileSync(path.join(dir, 'index.md'), frontmatter + mdContent.parent + tocBlock);
+    fs.writeFileSync(path.join(dir, 'index.md'), frontmatter + localizedContent + tocBlock);
 
     console.log(`📝 완료: [${category}] ${title} → content/${slug}/index.md`);
   }
