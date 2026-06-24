@@ -72,6 +72,12 @@ async function localizeImages(markdown, dir) {
 const notion = new Client({ auth: process.env.NOTION_TOKEN });
 const n2m = new NotionToMarkdown({ notionClient: notion });
 
+// notion-to-md@3은 heading_4를 미지원 → 커스텀 변환기 추가
+n2m.setCustomTransformer('heading_4', async (block) => {
+  const text = (block.heading_4?.rich_text || []).map((t) => t.plain_text).join('');
+  return `#### ${text}`;
+});
+
 async function syncNotion() {
   const databaseId = process.env.NOTION_DATABASE_ID;
 
