@@ -38,7 +38,11 @@ function downloadImage(imageUrl, destPath) {
   });
 }
 
-// 마크다운에서 이미지 URL 추출 후 로컬 저장, 경로 교체
+// 마크다운에서 이미지 URL 추출 후 로컬 저장, 캡션/크기 처리
+// 노션 캡션 규칙:
+//   "캡션 텍스트"         → 이미지 아래 캡션 표시
+//   "캡션 텍스트|500"     → 너비 500px + 캡션
+//   "|500"               → 너비 500px만 지정 (캡션 없음)
 async function localizeImages(markdown, dir) {
   const imageRegex = /!\[([^\]]*)\]\((https?:\/\/[^)]+)\)/g;
   const downloads = [];
@@ -60,7 +64,32 @@ async function localizeImages(markdown, dir) {
     const destPath = path.join(dir, item.filename);
     try {
       await downloadImage(item.imageUrl, destPath);
-      markdown = markdown.replace(item.full, `![${item.alt}](./${item.filename})`);
+
+      // 캡션과 너비 파싱: "캡션|500" 또는 "캡션" 또는 "|500"
+      let caption = item.alt.trim();
+      let width = null;
+      const widthMatch = caption.match(/\|(\d+)$/);
+      if (widthMatch) {
+        width = widthMatch[1];
+        caption = caption.slice(0, caption.lastIndexOf('|')).trim();
+      }
+
+      let replacement;
+      if (width) {
+        // 너비 지정: HTML img 태그 사용
+        const captionHtml = caption
+          ? `\n<p style="text-align:center;font-style:italic;font-size:15px;color:#6a737d">${caption}</p>`
+          : '';
+        replacement = `<img src="./${item.filename}" width="${width}" alt="${caption}" style="display:block;margin:0 auto">${captionHtml}`;
+      } else if (caption) {
+        // 캡션만 있을 때: 마크다운 이미지 + 이탤릭 캡션
+        replacement = `![${caption}](./${item.filename})\n*${caption}*`;
+      } else {
+        // 캡션/너비 없음: 일반 마크다운
+        replacement = `![](./${item.filename})`;
+      }
+
+      markdown = markdown.replace(item.full, replacement);
     } catch (err) {
       console.warn(`  ⚠️  이미지 다운로드 실패 (원본 URL 유지): ${item.imageUrl.slice(0, 60)}...`);
     }
@@ -76,6 +105,21 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
 n2m.setCustomTransformer('heading_4', async (block) => {
   const text = (block.heading_4?.rich_text || []).map((t) => t.plain_text).join('');
   return `#### ${text}`;
+});
+
+// 노션 빈 단락 → <br> (여러 줄 공백 보존)
+n2m.setCustomTransformer('paragraph', async (block) => {
+  const richText = block.paragraph?.rich_text || [];
+  if (richText.length === 0) return '<br>';
+  return false; // 기본 변환기 사용
+});
+
+// 노션 이미지 캡션 추출 (캡션을 alt 텍스트로 포함)
+n2m.setCustomTransformer('image', async (block) => {
+  const imageUrl = block.image?.file?.url || block.image?.external?.url || '';
+  if (!imageUrl) return '';
+  const caption = (block.image?.caption || []).map((t) => t.plain_text).join('').trim();
+  return `![${caption}](${imageUrl})`;
 });
 
 async function syncNotion() {

@@ -797,7 +797,8 @@
 .markdown img {
   display: block;
   margin: 0px auto;
-  max-width: 100%;
+  max-width: 500px;
+  width: 100%;
   box-sizing: initial;
   background-color: transparent;
 }
@@ -1056,8 +1057,10 @@
 .markdown .gatsby-resp-image-wrapper {
   display: flex !important;
   justify-content: center !important;
+  max-width: 500px !important;
   width: 100% !important;
   max-height: $content-image-max-height !important;
+  margin: 0 auto !important;
 
   img {
     max-width: 100% !important;
