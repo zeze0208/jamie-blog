@@ -130,13 +130,15 @@ async function syncNotion() {
     const mdBlocks = await n2m.pageToMarkdown(page.id);
     const mdContent = n2m.toMarkdownString(mdBlocks);
 
-    // 프론트매터 생성
+    // 프론트매터 생성 (title/tags는 따옴표로 감싸서 YAML 특수문자 처리)
+    const safeTitle = title.replace(/"/g, '\\"');
+    const safeTags = tags.replace(/"/g, '\\"');
     const frontmatter = `---
 emoji: ${emoji}
-title: ${title}
+title: "${safeTitle}"
 date: '${date}'
 author: Jamie
-tags: ${tags}
+tags: "${safeTags}"
 categories: ${category}
 ---
 
