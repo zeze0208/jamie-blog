@@ -4,7 +4,7 @@ title: "고장 난 피아노로 최고의 연주를? - ‘그래도 잘 됐잖�
 date: '2026-07-07 00:00:00'
 author: Jamie
 tags: "리더십, 일의태도, 조직문화, 에세이"
-categories: planning
+categories: life
 ---
 
 
