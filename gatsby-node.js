@@ -1,4 +1,5 @@
 const { createFilePath } = require(`gatsby-source-filesystem`);
+const { FIXED_CATEGORIES } = require(`./src/utils/categories`);
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions;
@@ -27,7 +28,6 @@ const createBlogPages = ({ createPage, results }) => {
 const createPostsPages = ({ createPage, results }) => {
   const categoryTemplate = require.resolve(`./src/templates/category-template.js`);
   // 글 유무와 관계없이 항상 노출할 고정 카테고리
-  const FIXED_CATEGORIES = ['All', 'featured', 'trend', 'cto', 'planning', 'etc'];
   const categorySet = new Set(FIXED_CATEGORIES);
   const { edges } = results.data.allMarkdownRemark;
 
@@ -51,7 +51,10 @@ const createPostsPages = ({ createPage, results }) => {
       context: {
         currentCategory,
         categories,
-        edges: edges.filter(({ node }) => node.frontmatter.categories.includes(currentCategory)),
+        // 사이드바에서 전체 카테고리/태그 카운트를 보여줘야 하므로
+        // 이 페이지의 카테고리로 미리 필터링하지 않고 전체 글 목록을 전달한다.
+        // 실제 화면에 보여줄 글 목록 필터링은 PostTabs 컴포넌트에서 처리한다.
+        edges,
       },
     });
   });
@@ -66,6 +69,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         edges {
           node {
             id
+            html
             excerpt(pruneLength: 500, truncate: true)
             fields {
               slug
@@ -73,6 +77,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             frontmatter {
               categories
               title
+              tags
               date(formatString: "MMMM DD, YYYY")
             }
           }

@@ -38,10 +38,25 @@ a {
     color: var(--primary-text-color);
     @include content-horizontal-padding;
 
+    .page-banner-area {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+
+        > * {
+            width: 100%;
+            max-width: $sidebar-content-max-width;
+        }
+    }
+
     .page-content {
         display: flex;
         flex-direction: column;
         align-items: center;
         @include content-max-width;
+
+        &.wide {
+            max-width: $sidebar-content-max-width;
+        }
     }
 }

@@ -4,52 +4,151 @@
 .post-tabs-wrapper {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-self: flex-start;
-  top: 0px;
   width: 100%;
+  gap: 30px;
 
-  .post-tabs {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  @include lg {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .post-sidebar {
     width: 100%;
-    max-width: $content-max-width + 40px;
-    margin-bottom: 16px;
-    gap: 8px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    gap: 48px;
+    overflow-x: auto;
 
-    .tab-row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 6px;
+    @include lg {
+      width: $sidebar-width;
+      flex-direction: column;
+      gap: 48px;
+      position: sticky;
+      top: 20px;
+      overflow-x: visible;
     }
 
-    .custom-tab {
-      height: 40px;
-      padding: 8px 16px;
-      border: none;
-      background: transparent;
-      font-family: $font-family;
-      color: var(--tab-text-color);
-      font-weight: 500;
-      font-size: 16px;
-      cursor: pointer;
-      border-radius: 8px;
-      transition: all 200ms ease;
-      white-space: nowrap;
+    .sidebar-section {
+      min-width: 220px;
 
-      &:hover {
-        color: var(--tab-hover-text-color);
-        background-color: var(--tab-selected-background-color);
-        transition: all 200ms ease;
+      @include lg {
+        min-width: 0;
+        width: 100%;
       }
 
-      &.selected {
-        background-color: var(--tab-selected-background-color);
-        color: var(--tab-hover-text-color);
-        font-weight: 600;
+      &:not(:first-child) {
+        border-left: 1px solid var(--post-card-border-color);
+        padding-left: 24px;
+
+        @include lg {
+          border-left: none;
+          padding-left: 0;
+          border-top: 1px solid var(--post-card-border-color);
+          padding-top: 24px;
+        }
       }
+
+      .sidebar-title {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--sidebar-title-color);
+        letter-spacing: 0.02em;
+        margin-bottom: 8px;
+        padding: 0 4px;
+      }
+
+      .sidebar-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+
+        .sidebar-item {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 8px;
+          border: none;
+          background: transparent;
+          font-family: $font-family;
+          color: var(--sidebar-item-text-color);
+          font-size: 15px;
+          font-weight: 500;
+          padding: 8px;
+          border-radius: 6px;
+          cursor: pointer;
+          text-align: left;
+          white-space: nowrap;
+          transition: all 150ms ease;
+
+          .sidebar-item-count {
+            font-size: 12px;
+            color: var(--sidebar-count-color);
+          }
+
+          &:hover {
+            background-color: var(--tab-selected-background-color);
+          }
+
+          &.selected {
+            background-color: var(--sidebar-item-active-background-color);
+            color: var(--sidebar-item-active-text-color);
+            font-weight: 700;
+
+            .sidebar-item-count {
+              color: var(--sidebar-item-active-text-color);
+            }
+          }
+        }
+      }
+
+      .sidebar-tag-list {
+        list-style: none;
+        margin: 0;
+        padding: 0 4px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+
+        .sidebar-tag {
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+          padding: 5px 10px;
+          font-size: 12px;
+          font-weight: 500;
+          color: var(--tag-badge-text-color);
+          background-color: var(--tag-badge-background-color);
+          border-radius: 999px;
+          white-space: nowrap;
+
+          .sidebar-tag-label {
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+
+          .sidebar-item-count {
+            font-size: 11px;
+            color: var(--sidebar-count-color);
+          }
+        }
+      }
+    }
+  }
+
+  .post-tabs-content {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    @include lg {
+      justify-content: flex-start;
     }
   }
 }

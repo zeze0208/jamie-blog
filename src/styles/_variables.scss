@@ -5,6 +5,10 @@ $content-max-width: 720px;
 $content-horizontal-padding: 15px;
 $content-image-max-height: 560px;
 
+// 사이드바 레이아웃(카테고리/태그)이 있는 화면 및 헤더/푸터에서 사용하는 넓은 컨테이너 폭
+$sidebar-width: 220px;
+$sidebar-content-max-width: 1340px;
+
 $screen-sm-min: 576px;
 $screen-md-min: 768px;
 $screen-lg-min: 1080px;

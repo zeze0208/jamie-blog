@@ -152,7 +152,15 @@ async function syncNotion() {
 
     const title = props.Title?.title?.[0]?.plain_text || 'Untitled';
     const emoji = props.Emoji?.rich_text?.[0]?.plain_text || '📝';
-    const category = props.Category?.select?.name || 'life';
+    // Category 속성은 Notion에서 다중 선택(Multi-select)으로 설정하면 여러 카테고리를 지정할 수 있다.
+    // 기존 단일 선택(Select) 속성으로 되어 있어도 그대로 동작하도록 둘 다 지원한다.
+    const multiSelectCategories = (props.Category?.multi_select || [])
+      .map((option) => option.name)
+      .filter(Boolean);
+    const category =
+      multiSelectCategories.length > 0
+        ? multiSelectCategories.join(' ')
+        : props.Category?.select?.name || 'life';
     const tags = props.Tags?.rich_text?.[0]?.plain_text || category;
     const dateRaw = props.Date?.date?.start;
     const date = dateRaw
@@ -195,7 +203,14 @@ categories: ${category}
     // 이미지 다운로드 및 경로 교체
     const localizedContent = await localizeImages(mdContent.parent, dir);
 
-    const tocBlock = '\n\n```toc\n```\n';
+    // gatsby-remark-table-of-contents는 문서에 마크다운 헤딩(#)이 하나도 없으면
+    // ```toc``` 코드 블록을 정상적으로 치환하지 못하고 손상된 AST 노드를 만들어낸다.
+    // 이 손상된 노드는 excerpt(카드 미리보기 텍스트) 생성 로직까지 깨뜨려서
+    // 카드에 본문 미리보기가 아예 비어 보이는 문제로 이어진다.
+    // (예: 번호 단락(1. 2. 3. ...) 스타일 글처럼 헤딩 없이 작성된 글)
+    // 따라서 헤딩이 하나라도 있을 때만 목차 블록을 추가한다.
+    const hasHeading = /^#{1,6}\s/m.test(localizedContent);
+    const tocBlock = hasHeading ? '\n\n```toc\n```\n' : '\n';
     fs.writeFileSync(path.join(dir, 'index.md'), frontmatter + localizedContent + tocBlock);
 
     console.log(`📝 완료: [${category}] ${title} → content/${slug}/index.md`);

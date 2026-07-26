@@ -1,23 +1,32 @@
 import { Link } from 'gatsby';
 import React from 'react';
+import { CATEGORY_LABELS } from '../../utils/categories';
 import './style.scss';
 
 function PostCard({ post }) {
-  const { id, slug, title, excerpt, date, categories } = post;
+  const { id, slug, title, excerpt, date, categories, tags, thumbnail } = post;
   return (
     <div className="post-card-wrapper">
       <Link className="post-card" key={id} to={slug}>
-        <div className="title">{title}</div>
-        <p className="description" dangerouslySetInnerHTML={{ __html: excerpt }} />
-        <div className="info">
-          <div className="date">{date}</div>
-          <div className="categories">
-            {categories.map((category) => (
-              <Link className="category" key={category} to={`/posts/${category}`}>
-                {category}
-              </Link>
-            ))}
+        <div className="post-card-body">
+          <div className="category-label">{CATEGORY_LABELS[categories[0]] || categories[0]}</div>
+          <div className="title">{title}</div>
+          <p className="description" dangerouslySetInnerHTML={{ __html: excerpt }} />
+          {tags?.length > 0 && (
+            <div className="tags">
+              {tags.slice(0, 4).map((tag) => (
+                <span className="tag-badge" key={tag}>
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          )}
+          <div className="info">
+            <div className="date">{date}</div>
           </div>
+        </div>
+        <div className="post-card-thumbnail">
+          <img src={thumbnail} alt="" loading="lazy" />
         </div>
       </Link>
     </div>

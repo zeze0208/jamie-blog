@@ -33,7 +33,7 @@ function PageHeader({ siteTitle }) {
               </Link>
             </div>
             <div className="trailing-section">
-              <Link className="link" to="/about">
+              <Link className="link nav-link" to="/about">
                 about
               </Link>
               {/* posts 메뉴 숨김 처리 — 복원하려면 아래 주석 해제 */}

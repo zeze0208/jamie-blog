@@ -1,4 +1,5 @@
 @use '../../styles/mixins'as *;
+@use '../../styles/variables'as *;
 
 .page-header-wrapper {
   display: flex;
@@ -11,7 +12,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    @include content-max-width;
+    width: 100%;
+    max-width: $sidebar-content-max-width;
 
     .link {
       font-weight: 700;
@@ -36,7 +38,16 @@
         }
       }
 
+      .nav-link {
+        font-weight: 400;
+        font-size: 14px;
+        color: var(--secondary-text-color);
 
+        @include md {
+          font-weight: 400;
+          font-size: 15px;
+        }
+      }
     }
   }
 }

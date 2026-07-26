@@ -1,25 +1,13 @@
 import React, { useMemo } from 'react';
 import PostCardColumn from '../post-card-column';
+import { CATEGORY_LABELS } from '../../utils/categories';
 import './style.scss';
 
-export const CATEGORY_LABELS = {
-  All: '전체',
-  trend: '인사이트/트렌드',
-  cto: 'CTO지망생',
-  planning: '기획자로 살아남기',
-  etc: 'ETC',
-  featured: 'FEATURED',
-};
+// 사이드바에 노출할 태그 최대 개수
+const MAX_SIDEBAR_TAGS = 20;
 
-export const CATEGORY_DESCRIPTIONS = {
-  trend: '읽어볼만한 인사이트와 트렌드 기록',
-  cto: 'IT서비스를 만들어가는 비개발자로 일하며, 바이브코딩과 데이터분석을 배워가는 과정을 기록합니다.',
-  planning: '사업기획, 서비스기획, 행사기획.. 온오프라인 기획과 관련한 업무 경험 기록',
-};
-
-// 1줄: All, featured / 2줄: trend, cto, planning, etc
-const ROW1_TABS = ['All', 'featured'];
-const ROW2_TABS = ['trend', 'cto', 'planning', 'etc'];
+// 홈 화면 등에서 한 번에 보여줄 글 개수 (더보기 버튼 노출 기준)
+const POSTS_PER_PAGE = 15;
 
 function PostTabs({ tabIndex, onChange, tabs, posts, showMoreButton }) {
   const currentTab = tabs[tabIndex];
@@ -29,44 +17,71 @@ function PostTabs({ tabIndex, onChange, tabs, posts, showMoreButton }) {
     return posts.filter((post) => post.categories.includes(currentTab));
   }, [posts, currentTab]);
 
-  const row1 = tabs.filter((t) => ROW1_TABS.includes(t));
-  const row2 = tabs.filter((t) => ROW2_TABS.includes(t));
+  const categoryCounts = useMemo(() => {
+    const counts = {};
+    tabs.forEach((tab) => {
+      counts[tab] = tab === 'All' ? posts.length : posts.filter((post) => post.categories.includes(tab)).length;
+    });
+    return counts;
+  }, [tabs, posts]);
+
+  const tagCounts = useMemo(() => {
+    const counts = {};
+    posts.forEach((post) => {
+      (post.tags || []).forEach((tag) => {
+        counts[tag] = (counts[tag] || 0) + 1;
+      });
+    });
+    return Object.entries(counts)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, MAX_SIDEBAR_TAGS);
+  }, [posts]);
 
   const handleClick = (tab) => {
     const idx = tabs.indexOf(tab);
     if (idx !== -1) onChange(null, idx);
   };
 
-  const TabButton = ({ tab }) => (
-    <button
-      className={`custom-tab ${currentTab === tab ? 'selected' : ''}`}
-      onClick={() => handleClick(tab)}
-    >
-      {CATEGORY_LABELS[tab] || tab}
-    </button>
-  );
-
   return (
     <div className="post-tabs-wrapper">
-      <div className="post-tabs">
-        <div className="tab-row">
-          {row1.map((tab) => (
-            <TabButton key={tab} tab={tab} />
-          ))}
-        </div>
-        {row2.length > 0 && (
-          <div className="tab-row">
-            {row2.map((tab) => (
-              <TabButton key={tab} tab={tab} />
+      <aside className="post-sidebar">
+        <div className="sidebar-section">
+          <div className="sidebar-title">카테고리</div>
+          <ul className="sidebar-list">
+            {tabs.map((tab) => (
+              <li key={tab}>
+                <button
+                  className={`sidebar-item ${currentTab === tab ? 'selected' : ''}`}
+                  onClick={() => handleClick(tab)}
+                >
+                  <span className="sidebar-item-label">{CATEGORY_LABELS[tab] || tab}</span>
+                  <span className="sidebar-item-count">{categoryCounts[tab]}</span>
+                </button>
+              </li>
             ))}
+          </ul>
+        </div>
+        {tagCounts.length > 0 && (
+          <div className="sidebar-section">
+            <div className="sidebar-title">태그</div>
+            <ul className="sidebar-tag-list">
+              {tagCounts.map(([tag, count]) => (
+                <li key={tag} className="sidebar-tag">
+                  <span className="sidebar-tag-label">#{tag}</span>
+                  <span className="sidebar-item-count">{count}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         )}
+      </aside>
+      <div className="post-tabs-content">
+        <PostCardColumn
+          posts={showMoreButton ? tabPosts.slice(0, POSTS_PER_PAGE) : tabPosts}
+          showMoreButton={showMoreButton && tabPosts.length > POSTS_PER_PAGE}
+          moreUrl={`posts/${tabIndex === 0 ? '' : currentTab}`}
+        />
       </div>
-      <PostCardColumn
-        posts={showMoreButton ? tabPosts.slice(0, 4) : tabPosts}
-        showMoreButton={showMoreButton && tabPosts.length > 4}
-        moreUrl={`posts/${tabIndex === 0 ? '' : currentTab}`}
-      />
     </div>
   );
 }

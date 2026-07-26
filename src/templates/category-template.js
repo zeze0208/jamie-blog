@@ -5,7 +5,8 @@ import Layout from '../layout';
 import Seo from '../components/seo';
 import Post from '../models/post';
 import CategoryPageHeader from '../components/category-page-header';
-import PostTabs, { CATEGORY_LABELS, CATEGORY_DESCRIPTIONS } from '../components/post-tabs';
+import PostTabs from '../components/post-tabs';
+import { CATEGORY_LABELS, CATEGORY_DESCRIPTIONS } from '../utils/categories';
 
 function CategoryTemplate({ pageContext }) {
   const { edges, currentCategory } = pageContext;
@@ -28,7 +29,7 @@ function CategoryTemplate({ pageContext }) {
   const description = CATEGORY_DESCRIPTIONS[currentCategory];
 
   return (
-    <Layout>
+    <Layout wide>
       <Seo title="Posts" />
       <CategoryPageHeader
         title={title}

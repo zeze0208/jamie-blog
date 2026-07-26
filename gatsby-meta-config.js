@@ -1,5 +1,5 @@
 module.exports = {
-  title: `Jamie Blog`, // TODO: 블로그 이름 나중에 변경
+  title: `생각하는 감자log`,
   description: `일하는 과정을 기록하는 Jamie의 블로그`,
   language: `ko`, // `ko`, `en` => currently support versions for Korean and English
   siteUrl: `https://jamieelog.netlify.app`, // 도메인 구매 후 실제 URL로 변경
@@ -10,6 +10,14 @@ module.exports = {
     },
   },
   ga: '0', // Google Analytics Tracking ID
+
+  // 홈 화면 상단 메인 배너
+  // image: static/ 폴더에 파일을 넣고 파일명을 아래에 지정 (권장 사이즈: 1600x320px, 레티나 대응 시 3200x640px)
+  mainBanner: {
+    image: `/main-banner.png`,
+    title: `생각하는 감자log`,
+    subtitle: `일하는 과정을 기록하는 Jamie의 블로그`,
+  },
   author: {
     name: `Jamie`,
     bio: {

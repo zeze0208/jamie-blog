@@ -58,4 +58,21 @@
       font-weight: 600;
     }
   }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+
+    .tag-badge {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--tag-badge-text-color);
+      background-color: var(--tag-badge-background-color);
+      border-radius: 4px;
+      padding: 4px 9px;
+      white-space: nowrap;
+    }
+  }
 }
