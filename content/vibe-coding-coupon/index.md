@@ -4,7 +4,7 @@ title: "개발팀에서 2주 걸린다고 한 기능 개선, 클로드랑 이틀
 date: '2026-06-12 00:00:00'
 author: Jamie
 tags: "바이브코딩, 클로드코드, AI기획, 비개발자"
-categories: life
+categories: cto
 ---
 
 
