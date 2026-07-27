@@ -4,8 +4,8 @@ title: "고장 난 피아노로 최고의 연주를 해냈으니 Win-Win인가�
 subtitle: "‘그래도 잘 됐잖으니 괜찮은 거 아니야?’같은 X소리"
 date: '2026-07-07 00:00:00'
 author: Jamie
-tags: "리더십, 일의태도, 조직문화, 에세이"
-categories: planning
+tags: "리더십, 일의태도, 조직문화, 협업"
+categories: planning work
 ---
 
 

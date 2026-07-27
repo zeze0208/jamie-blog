@@ -4,8 +4,8 @@ title: "기획자·예술인을 위한 KOPIS OPEN API 활용 가이드 1편 - �
 subtitle: "데이터 열어줘서 고맙긴 한데… 어떻게 써야 돼?"
 date: '2026-06-29 00:00:00'
 author: Jamie
-tags: "KOPIS API, KOPIS OPEN API, OpenAPI, API 활용법, 공공 API, 공연예술통합전산망"
-categories: cto
+tags: "KOPIS, API 활용법, 바이브코딩, 데이터분석, 공공 API, 공연예술통합전산망, KOPIS OpenAPI, OpenAPI"
+categories: cto planning
 ---
 
 
