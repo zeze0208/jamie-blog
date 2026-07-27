@@ -4,13 +4,14 @@ import { CATEGORY_LABELS } from '../../utils/categories';
 import './style.scss';
 
 function PostCard({ post }) {
-  const { id, slug, title, excerpt, date, categories, tags, thumbnail } = post;
+  const { id, slug, title, subtitle, excerpt, date, categories, tags, thumbnail } = post;
   return (
     <div className="post-card-wrapper">
       <Link className="post-card" key={id} to={slug}>
         <div className="post-card-body">
           <div className="category-label">{CATEGORY_LABELS[categories[0]] || categories[0]}</div>
           <div className="title">{title}</div>
+          {subtitle && <div className="subtitle">{subtitle}</div>}
           <p className="description" dangerouslySetInnerHTML={{ __html: excerpt }} />
           {tags?.length > 0 && (
             <div className="tags">

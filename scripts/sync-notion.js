@@ -162,6 +162,7 @@ async function syncNotion() {
         ? multiSelectCategories.join(' ')
         : props.Category?.select?.name || 'life';
     const tags = props.Tags?.rich_text?.[0]?.plain_text || category;
+    const subtitle = props['소제목']?.rich_text?.[0]?.plain_text || '';
     const dateRaw = props.Date?.date?.start;
     const date = dateRaw
       ? `${dateRaw} 00:00:00`
@@ -182,12 +183,14 @@ async function syncNotion() {
     const mdBlocks = await n2m.pageToMarkdown(page.id);
     const mdContent = n2m.toMarkdownString(mdBlocks);
 
-    // 프론트매터 생성 (title/tags는 따옴표로 감싸서 YAML 특수문자 처리)
+    // 프론트매터 생성 (title/tags/subtitle은 따옴표로 감싸서 YAML 특수문자 처리)
     const safeTitle = title.replace(/"/g, '\\"');
     const safeTags = tags.replace(/"/g, '\\"');
+    const safeSubtitle = subtitle.replace(/"/g, '\\"');
     const frontmatter = `---
 emoji: ${emoji}
 title: "${safeTitle}"
+subtitle: "${safeSubtitle}"
 date: '${date}'
 author: Jamie
 tags: "${safeTags}"

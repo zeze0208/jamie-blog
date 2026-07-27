@@ -9,7 +9,7 @@ function AboutPage({ data }) {
   const { author } = metaData;
 
   return (
-    <Layout>
+    <Layout wide>
       <Seo title="About" />
       <div className="about-wrapper">
         <div className="about-header">
@@ -21,7 +21,8 @@ function AboutPage({ data }) {
           <ul className="about-tags">
             <li>경영학 전공</li>
             <li>스타트업 10년차</li>
-            <li>사업/전략기획</li>
+            <li>사업기획</li>
+            <li>전략기획</li>
             <li>IT서비스기획</li>
           </ul>
         </div>

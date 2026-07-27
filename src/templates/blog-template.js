@@ -7,11 +7,12 @@ import PostNavigator from '../components/post-navigator';
 import Post from '../models/post';
 import PostContent from '../components/post-content';
 import Utterances from '../components/utterances';
+import { getRelatedPosts } from '../utils/helpers';
 
 function BlogTemplate({ data }) {
   const curPost = new Post(data.cur);
-  const prevPost = data.prev && new Post(data.prev);
-  const nextPost = data.next && new Post(data.next);
+  const allPosts = data.all.edges.map(({ node }) => new Post(node));
+  const relatedPosts = getRelatedPosts(curPost, allPosts, 4);
   const { comments } = data.site?.siteMetadata;
   const utterancesRepo = comments?.utterances?.repo;
 
@@ -20,7 +21,7 @@ function BlogTemplate({ data }) {
       <Seo title={curPost?.title} description={curPost?.excerpt} />
       <PostHeader post={curPost} />
       <PostContent html={curPost.html} />
-      <PostNavigator prevPost={prevPost} nextPost={nextPost} />
+      <PostNavigator posts={relatedPosts} />
       {utterancesRepo && <Utterances repo={utterancesRepo} path={curPost.slug} />}
     </Layout>
   );
@@ -29,7 +30,7 @@ function BlogTemplate({ data }) {
 export default BlogTemplate;
 
 export const pageQuery = graphql`
-  query($slug: String, $nextSlug: String, $prevSlug: String) {
+  query($slug: String) {
     cur: markdownRemark(fields: { slug: { eq: $slug } }) {
       id
       html
@@ -37,6 +38,7 @@ export const pageQuery = graphql`
       frontmatter {
         date(formatString: "MMMM DD, YYYY")
         title
+        subtitle
         categories
         tags
         author
@@ -47,35 +49,24 @@ export const pageQuery = graphql`
       }
     }
 
-    next: markdownRemark(fields: { slug: { eq: $nextSlug } }) {
-      id
-      html
-      frontmatter {
-        date(formatString: "MMMM DD, YYYY")
-        title
-        categories
-        tags
-        author
-        emoji
-      }
-      fields {
-        slug
-      }
-    }
-
-    prev: markdownRemark(fields: { slug: { eq: $prevSlug } }) {
-      id
-      html
-      frontmatter {
-        date(formatString: "MMMM DD, YYYY")
-        title
-        categories
-        tags
-        author
-        emoji
-      }
-      fields {
-        slug
+    all: allMarkdownRemark(sort: { fields: frontmatter___date, order: DESC }, limit: 1000) {
+      edges {
+        node {
+          id
+          html
+          excerpt(pruneLength: 500, truncate: true)
+          frontmatter {
+            date(formatString: "MMMM DD, YYYY")
+            title
+            categories
+            tags
+            author
+            emoji
+          }
+          fields {
+            slug
+          }
+        }
       }
     }
 

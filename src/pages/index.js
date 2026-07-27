@@ -45,6 +45,7 @@ export const pageQuery = graphql`
           frontmatter {
             categories
             title
+            subtitle
             tags
             date(formatString: "MMMM DD, YYYY")
           }

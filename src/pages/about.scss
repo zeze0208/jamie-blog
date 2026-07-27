@@ -1,5 +1,8 @@
+@use '../styles/variables' as *;
+
 .about-wrapper {
-  max-width: 680px;
+  width: 100%;
+  max-width: $sidebar-content-max-width;
   margin: 60px auto;
   padding: 0 20px;
 

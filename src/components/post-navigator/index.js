@@ -1,25 +1,29 @@
 import { Link } from 'gatsby';
 import React from 'react';
+import { CATEGORY_LABELS } from '../../utils/categories';
 import './style.scss';
 
-function PostNavigator({ prevPost, nextPost }) {
+function PostNavigator({ posts }) {
+  if (!posts || posts.length === 0) return null;
+
   return (
-    <div className="post-navigator">
-      <div className="post-navigator-card-wrapper">
-        {nextPost && (
-          <Link className="post-card prev" key={nextPost.id} to={nextPost.slug}>
-            <div className="direction">이전 글</div>
-            <div className="title">{nextPost.title}</div>
+    <div className="post-navigator-wrapper">
+      <div className="post-navigator-header">More from 생각하는 감자</div>
+      <div className="post-navigator-grid">
+        {posts.map((post) => (
+          <Link className="post-navigator-card" key={post.id} to={post.slug}>
+            <div className="post-navigator-thumbnail">
+              <img src={post.thumbnail} alt="" loading="lazy" />
+            </div>
+            <div className="post-navigator-body">
+              <div className="category-label">
+                {CATEGORY_LABELS[post.categories[0]] || post.categories[0]}
+              </div>
+              <div className="title">{post.title}</div>
+              <div className="date">{post.date}</div>
+            </div>
           </Link>
-        )}
-      </div>
-      <div className="post-navigator-card-wrapper">
-        {prevPost && (
-          <Link className="post-card next" key={prevPost.id} to={prevPost.slug}>
-            <div className="direction">다음 글</div>
-            <div className="title">{prevPost.title}</div>
-          </Link>
-        )}
+        ))}
       </div>
     </div>
   );

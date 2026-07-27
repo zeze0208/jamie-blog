@@ -1,6 +1,27 @@
 const { createFilePath } = require(`gatsby-source-filesystem`);
 const { FIXED_CATEGORIES } = require(`./src/utils/categories`);
 
+// subtitle은 최근에 추가된 프론트매터 필드라 기존 글에는 값이 없을 수 있다.
+// 스키마를 명시적으로 선언해두지 않으면 subtitle이 없는 글만 있을 때
+// GraphQL 쿼리에서 필드 자체를 찾지 못하는 문제가 생길 수 있어 직접 타입을 지정한다.
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions;
+  createTypes(`
+    type MarkdownRemark implements Node {
+      frontmatter: MarkdownRemarkFrontmatter
+    }
+    type MarkdownRemarkFrontmatter {
+      title: String
+      subtitle: String
+      date: Date @dateformat
+      emoji: String
+      author: String
+      tags: String
+      categories: String
+    }
+  `);
+};
+
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions;
   if (node.internal.type === `MarkdownRemark`) {
@@ -77,6 +98,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             frontmatter {
               categories
               title
+              subtitle
               tags
               date(formatString: "MMMM DD, YYYY")
             }
