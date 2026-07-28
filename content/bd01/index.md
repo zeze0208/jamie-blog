@@ -5,7 +5,7 @@ subtitle: "세탁기 10개를 돌리는 능력자와 일해도 세탁시간이 �
 date: '2026-07-19 00:00:00'
 author: Jamie
 tags: "협업, 파트너십, 조직관리, 완주력, 최소량의법칙, 사업기획, 사업개발"
-categories: planning BD
+categories: planning
 ---
 
 
