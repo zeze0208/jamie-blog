@@ -3,7 +3,7 @@ emoji: 🎭
 title: "KOPIS 데이터 활용해 공연 수익 계산기를 만들다"
 subtitle: "API의 실체는 아직 잘 모르지만"
 date: '2026-06-15 00:00:00'
-author: Jamie
+author: 감자
 tags: "KOPIS, 공연수익계산기, 바이브코딩, Next.js, OpenAPI, 공연예술통합전산망"
 categories: cto
 ---

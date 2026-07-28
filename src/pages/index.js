@@ -8,7 +8,7 @@ import Post from '../models/post';
 import PostTabs from '../components/post-tabs';
 import { FIXED_CATEGORIES } from '../utils/categories';
 
-function HomePage({ data }) {
+function HomePage({ data, location }) {
   const posts = data.allMarkdownRemark.edges.map(({ node }) => new Post(node));
 
   const categories = FIXED_CATEGORIES;
@@ -18,7 +18,7 @@ function HomePage({ data }) {
 
   return (
     <Layout wide>
-      <Seo title="Home" />
+      <Seo title="Home" pathname={location?.pathname} />
       {/* <Bio author={author} language={language} /> */}
       {/* 홈 화면 프로필 섹션 숨김 처리 — 복원하려면 위 주석 해제 및 import Bio 주석도 해제 */}
       <PostTabs

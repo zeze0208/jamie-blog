@@ -17,9 +17,10 @@ function PostNavigator({ posts }) {
             </div>
             <div className="post-navigator-body">
               <div className="category-label">
-                {CATEGORY_LABELS[post.categories[0]] || post.categories[0]}
+                {post.categories.map((category) => CATEGORY_LABELS[category] || category).join(' · ')}
               </div>
               <div className="title">{post.title}</div>
+              {post.subtitle && <div className="subtitle">{post.subtitle}</div>}
               <div className="date">{post.date}</div>
             </div>
           </Link>

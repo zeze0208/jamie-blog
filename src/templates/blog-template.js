@@ -18,7 +18,15 @@ function BlogTemplate({ data }) {
 
   return (
     <Layout>
-      <Seo title={curPost?.title} description={curPost?.excerpt} />
+      <Seo
+        title={curPost?.title}
+        description={curPost?.excerpt}
+        pathname={curPost?.slug}
+        image={curPost?.thumbnail}
+        isArticle
+        datePublished={data.cur?.frontmatter?.isoDate}
+        author={curPost?.author}
+      />
       <PostHeader post={curPost} />
       <PostContent html={curPost.html} />
       <PostNavigator posts={relatedPosts} />
@@ -37,6 +45,7 @@ export const pageQuery = graphql`
       excerpt(pruneLength: 500, truncate: true)
       frontmatter {
         date(formatString: "MMMM DD, YYYY")
+        isoDate: date(formatString: "YYYY-MM-DD")
         title
         subtitle
         categories
@@ -58,6 +67,7 @@ export const pageQuery = graphql`
           frontmatter {
             date(formatString: "MMMM DD, YYYY")
             title
+            subtitle
             categories
             tags
             author

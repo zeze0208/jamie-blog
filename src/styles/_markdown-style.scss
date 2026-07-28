@@ -1030,7 +1030,9 @@
   justify-content: center;
   width: 340px;
   position: fixed;
-  top: 75px;
+  // 헤더(60px) + 메인배너(최대 268px, aspect-ratio 5:1 · max-width 1340px 기준) + 배너 하단 여백(32px) +
+  // 여유값을 더해, 목차가 배너 영역까지 올라가지 않도록 함
+  top: 380px;
   right: 0px;
 
   ul {

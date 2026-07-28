@@ -3,7 +3,7 @@ emoji: 🗣️
 title: "넘치는 피드백 방법론들 사이에서 나를 지키는 법"
 subtitle: "좋은 피드백에 정답은 없다"
 date: '2026-07-13 00:00:00'
-author: Jamie
+author: 감자
 tags: "리더십, 피드백, 조직문화, 일의태도, 협업, 스타트업"
 categories: work
 ---

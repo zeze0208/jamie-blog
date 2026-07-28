@@ -4,13 +4,13 @@ import Layout from '../layout';
 import Seo from '../components/seo';
 import './about.scss';
 
-function AboutPage({ data }) {
+function AboutPage({ data, location }) {
   const metaData = data.site.siteMetadata;
   const { author } = metaData;
 
   return (
     <Layout wide>
-      <Seo title="About" />
+      <Seo title="About" pathname={location?.pathname} />
       <div className="about-wrapper">
         <div className="about-header">
           <h1 className="about-name">{author.name}</h1>

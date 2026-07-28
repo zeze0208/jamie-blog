@@ -8,7 +8,7 @@ import CategoryPageHeader from '../components/category-page-header';
 import PostTabs from '../components/post-tabs';
 import { CATEGORY_LABELS, CATEGORY_DESCRIPTIONS } from '../utils/categories';
 
-function CategoryTemplate({ pageContext }) {
+function CategoryTemplate({ pageContext, location }) {
   const { edges, currentCategory } = pageContext;
   const { categories } = pageContext;
   const currentTabIndex = useMemo(
@@ -30,7 +30,7 @@ function CategoryTemplate({ pageContext }) {
 
   return (
     <Layout wide>
-      <Seo title="Posts" />
+      <Seo title="Posts" pathname={location?.pathname} />
       <CategoryPageHeader
         title={title}
         subtitle={description || `${posts.length} posts`}

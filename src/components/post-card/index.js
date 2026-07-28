@@ -9,7 +9,9 @@ function PostCard({ post }) {
     <div className="post-card-wrapper">
       <Link className="post-card" key={id} to={slug}>
         <div className="post-card-body">
-          <div className="category-label">{CATEGORY_LABELS[categories[0]] || categories[0]}</div>
+          <div className="category-label">
+            {categories.map((category) => CATEGORY_LABELS[category] || category).join(' · ')}
+          </div>
           <div className="title">{title}</div>
           {subtitle && <div className="subtitle">{subtitle}</div>}
           <p className="description" dangerouslySetInnerHTML={{ __html: excerpt }} />

@@ -1,6 +1,6 @@
 module.exports = {
   title: `생각하는 감자log`,
-  description: `일하는 과정을 기록하는 Jamie의 블로그`,
+  description: `일하는 과정을 기록하는 감자의 블로그`,
   language: `ko`, // `ko`, `en` => currently support versions for Korean and English
   siteUrl: `https://jamieelog.netlify.app`, // 도메인 구매 후 실제 URL로 변경
   ogImage: `/og-image.png`, // Path to your in the 'static' folder
@@ -9,17 +9,21 @@ module.exports = {
       repo: `zeze0208/jamie-blog`,
     },
   },
-  ga: '0', // Google Analytics Tracking ID
+  ga: '0', // Google Analytics Tracking ID — '0'은 미설정 상태(더미 값). GA4 속성 생성 후 측정 ID(G-XXXXXXX)로 교체해야 실제 방문자 데이터가 수집됨.
+  verification: {
+    google: '', // Google Search Console 소유권 확인 코드 (meta 태그 방식). 발급 후 이 값만 채우면 자동 반영됨.
+    naver: '', // 네이버 서치어드바이저 소유권 확인 코드.
+  },
 
   // 홈 화면 상단 메인 배너
   // image: static/ 폴더에 파일을 넣고 파일명을 아래에 지정 (권장 사이즈: 1600x320px, 레티나 대응 시 3200x640px)
   mainBanner: {
     image: `/main-banner.png`,
     title: `생각하는 감자log`,
-    subtitle: `일하는 과정을 기록하는 Jamie의 블로그`,
+    subtitle: `일하는 과정을 기록하는 감자의 블로그`,
   },
   author: {
-    name: `Jamie`,
+    name: `감자`, // GamZa
     bio: {
       role: ``,
       description: ['일하는 과정을 기록하는'],

@@ -3,7 +3,7 @@ emoji: 📝
 title: "정석대로 풀리지 않는 문제들도 있다"
 subtitle: "문제를 정의하는 것보다 어쩌면 더 중요한 것은"
 date: '2026-07-27 00:00:00'
-author: Jamie
+author: 감자
 tags: "문제정의, 리프레이밍, 의사결정, 사업기획, 사업운영, 문제해결력, 스타트업, 사업개발"
 categories: planning
 ---

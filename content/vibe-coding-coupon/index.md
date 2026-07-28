@@ -3,7 +3,7 @@ emoji: 🫡
 title: "개발팀에서 2주 걸린다고 한 기능 개선, 기획자가 이틀만에 완료해봄^-^v"
 subtitle: "샤라웃 투 클로드코드, 바이브코딩 만세"
 date: '2026-06-12 00:00:00'
-author: Jamie
+author: 감자
 tags: "바이브코딩, 클로드코드, AI기획, 비개발자"
 categories: cto
 ---
