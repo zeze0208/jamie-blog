@@ -2,7 +2,7 @@ module.exports = {
   title: `생각하는 감자log`,
   description: `일하는 과정을 기록하는 감자의 블로그`,
   language: `ko`, // `ko`, `en` => currently support versions for Korean and English
-  siteUrl: `https://jamieelog.netlify.app`, // 도메인 구매 후 실제 URL로 변경
+  siteUrl: `https://jai.me.kr`,
   ogImage: `/og-image.png`, // Path to your in the 'static' folder
   comments: {
     utterances: {
