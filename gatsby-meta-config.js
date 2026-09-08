@@ -9,7 +9,7 @@ module.exports = {
       repo: `zeze0208/jamie-blog`,
     },
   },
-  ga: '0', // GA4 측정 ID (G-XXXXXXXXXX). '0'은 미설정 상태 — 발급받은 값으로 교체하면 자동 반영됨.
+  ga: 'G-5QFW5H2Z2F', // GA4 측정 ID
   verification: {
     google: '', // Google Search Console 소유권 확인 코드 (meta 태그 방식). 발급 후 이 값만 채우면 자동 반영됨.
     naver: '', // 네이버 서치어드바이저 소유권 확인 코드.
