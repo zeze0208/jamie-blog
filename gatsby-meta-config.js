@@ -23,7 +23,7 @@ module.exports = {
     subtitle: `일하는 과정을 기록하는 감자의 블로그`,
   },
   author: {
-    name: `감자`, // GamZa
+    name: `Jamie`,
     bio: {
       role: ``,
       description: ['일하는 과정을 기록하는'],

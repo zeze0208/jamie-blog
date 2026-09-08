@@ -40,6 +40,9 @@ function AboutPage({ data, location }) {
           <p>
             대문자 ISTJ, 대표적인 사람싫어 인간이 '좋은 리더'가 되기 위해 고군분투 하는 중.
           </p>
+          <p>
+            Jamie를 착각해서 jai.me로 3년치 도메인 등록을 해버린 슬픈 사연을 가지고 있다..
+          </p>
         </div>
       </div>
     </Layout>

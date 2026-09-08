@@ -3,7 +3,6 @@ import { useStaticQuery, graphql } from 'gatsby';
 import PageHeader from '../components/page-header';
 import PageFooter from '../components/page-footer';
 import ThemeSwitch from '../components/theme-switch';
-import MainBanner from '../components/main-banner';
 import './style.scss';
 
 const Layout = ({ children, wide }) => {
@@ -12,11 +11,6 @@ const Layout = ({ children, wide }) => {
       site {
         siteMetadata {
           title
-          mainBanner {
-            image
-            title
-            subtitle
-          }
           author {
             name
             social {
@@ -27,20 +21,11 @@ const Layout = ({ children, wide }) => {
       }
     }
   `);
-  const { title, author, mainBanner } = data.site.siteMetadata;
+  const { author } = data.site.siteMetadata;
 
   return (
     <div className="page-wrapper">
-      <PageHeader siteTitle={title || `Title`} />
-      {mainBanner && (
-        <div className="page-banner-area">
-          <MainBanner
-            image={mainBanner.image}
-            title={mainBanner.title}
-            subtitle={mainBanner.subtitle}
-          />
-        </div>
-      )}
+      <PageHeader siteTitle="jai.me" />
       <main className={`page-content ${wide ? 'wide' : ''}`}>{children}</main>
       <PageFooter
         author={author.name || `Author`}
