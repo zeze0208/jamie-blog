@@ -42,11 +42,12 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-google-analytics`,
+      resolve: `gatsby-plugin-google-gtag`,
       options: {
-        trackingId: metaConfig.ga,
-        head: true,
-        anonymize: true,
+        trackingIds: metaConfig.ga && metaConfig.ga !== '0' ? [metaConfig.ga] : [],
+        pluginConfig: {
+          head: true,
+        },
       },
     },
     {
