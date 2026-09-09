@@ -18,7 +18,7 @@ function HomePage({ data, location }) {
 
   return (
     <Layout wide>
-      <Seo title="Home" pathname={location?.pathname} />
+      <Seo pathname={location?.pathname} />
       {/* <Bio author={author} language={language} /> */}
       {/* 홈 화면 프로필 섹션 숨김 처리 — 복원하려면 위 주석 해제 및 import Bio 주석도 해제 */}
       <PostTabs
