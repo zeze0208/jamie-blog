@@ -3,7 +3,7 @@ emoji: ⛈️
 title: "실무를 모르는 리더는 되고 싶지 않아 - 고통과 분노의 일기"
 subtitle: "실무를 잘 해본 경험이 없는 리더는 자격이 없다, 정말로.."
 date: '2026-08-20 00:00:00'
-author: 감자
+author: jaime
 tags: "리더십, 실무, 관리자, 커리어, 조직, 일하는방식"
 categories: etc
 ---

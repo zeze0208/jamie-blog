@@ -3,7 +3,7 @@ emoji: 🗺️
 title: "기획자·예술인을 위한 KOPIS OPEN API 활용 가이드 2편 — 데이터 파악하고 AI에게 시켜보기"
 subtitle: "데이터가 있다는 건 알겠는데... 이걸 내가 어떻게??"
 date: '2026-07-21 00:00:00'
-author: 감자
+author: jaime
 tags: "KOPIS, API 활용법, 바이브코딩, 데이터분석, 공공 API, 공연예술통합전산망, KOPIS OpenAPI, 코피스, 공연전산망, 공연데이터, 예술데이터"
 categories: cto
 ---

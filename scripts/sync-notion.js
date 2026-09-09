@@ -192,7 +192,7 @@ emoji: ${emoji}
 title: "${safeTitle}"
 subtitle: "${safeSubtitle}"
 date: '${date}'
-author: 감자
+author: jaime
 tags: "${safeTags}"
 categories: ${category}
 ---

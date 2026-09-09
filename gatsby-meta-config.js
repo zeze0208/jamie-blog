@@ -1,6 +1,6 @@
 module.exports = {
   title: `Jaime-log`,
-  description: `일하는 과정을 기록하는 감자의 블로그`,
+  description: `기획자의 일과 인사이트를 기록하는 Jaime | 행사기획하던 PCO에서 뜬금없이 IT기획자로, 그리고 사실은 사업기획이 전문인 전방위 기획자`,
   language: `ko`, // `ko`, `en` => currently support versions for Korean and English
   siteUrl: `https://jai.me.kr`,
   ogImage: `/og-image.png`, // Path to your in the 'static' folder

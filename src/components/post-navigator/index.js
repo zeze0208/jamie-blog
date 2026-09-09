@@ -8,7 +8,7 @@ function PostNavigator({ posts }) {
 
   return (
     <div className="post-navigator-wrapper">
-      <div className="post-navigator-header">More from 생각하는 감자</div>
+      <div className="post-navigator-header">More from Jaime</div>
       <div className="post-navigator-grid">
         {posts.map((post) => (
           <Link className="post-navigator-card" key={post.id} to={post.slug}>
