@@ -28,13 +28,15 @@ function BlogTemplate({ data }) {
         datePublished={data.cur?.frontmatter?.isoDate}
         author={curPost?.author}
       />
-      <div className="post-reading-layout">
+      <div className="post-tabs-wrapper">
         <PostSidebar posts={allPosts} activeCategories={curPost.categories} />
-        <div className="post-reading-content">
-          <PostHeader post={curPost} />
-          <PostContent html={curPost.html} />
-          <PostNavigator posts={relatedPosts} />
-          {utterancesRepo && <Utterances repo={utterancesRepo} path={curPost.slug} />}
+        <div className="post-tabs-content">
+          <div style={{ width: '100%' }}>
+            <PostHeader post={curPost} />
+            <PostContent html={curPost.html} />
+            <PostNavigator posts={relatedPosts} />
+            {utterancesRepo && <Utterances repo={utterancesRepo} path={curPost.slug} />}
+          </div>
         </div>
       </div>
     </Layout>

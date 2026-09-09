@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import { Link } from 'gatsby';
 import { CATEGORY_LABELS } from '../../utils/categories';
 import '../post-tabs/style.scss';
-import './style.scss';
 
 // 사이드바에 노출할 태그 최대 개수
 const MAX_SIDEBAR_TAGS = 20;
