@@ -4,6 +4,7 @@ import Layout from '../layout';
 import Seo from '../components/seo';
 import PostHeader from '../components/post-header';
 import PostNavigator from '../components/post-navigator';
+import PostSidebar from '../components/post-sidebar';
 import Post from '../models/post';
 import PostContent from '../components/post-content';
 import Utterances from '../components/utterances';
@@ -17,7 +18,7 @@ function BlogTemplate({ data }) {
   const utterancesRepo = comments?.utterances?.repo;
 
   return (
-    <Layout>
+    <Layout wide>
       <Seo
         title={curPost?.title}
         description={curPost?.excerpt}
@@ -27,10 +28,15 @@ function BlogTemplate({ data }) {
         datePublished={data.cur?.frontmatter?.isoDate}
         author={curPost?.author}
       />
-      <PostHeader post={curPost} />
-      <PostContent html={curPost.html} />
-      <PostNavigator posts={relatedPosts} />
-      {utterancesRepo && <Utterances repo={utterancesRepo} path={curPost.slug} />}
+      <div className="post-reading-layout">
+        <PostSidebar posts={allPosts} activeCategories={curPost.categories} />
+        <div className="post-reading-content">
+          <PostHeader post={curPost} />
+          <PostContent html={curPost.html} />
+          <PostNavigator posts={relatedPosts} />
+          {utterancesRepo && <Utterances repo={utterancesRepo} path={curPost.slug} />}
+        </div>
+      </div>
     </Layout>
   );
 }
