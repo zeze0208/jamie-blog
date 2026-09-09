@@ -6,6 +6,8 @@
   justify-content: center;
   width: 100%;
   height: 60px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 
 
   .page-header {
@@ -24,6 +26,18 @@
         font-weight: 700;
         font-size: 20px;
       }
+    }
+
+    .home-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .home-icon {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
     }
 
     .trailing-section {

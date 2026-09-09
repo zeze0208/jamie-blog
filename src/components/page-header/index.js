@@ -28,7 +28,8 @@ function PageHeader({ siteTitle }) {
         <header className="page-header-wrapper">
           <div className="page-header">
             <div className="front-section">
-              <Link className="link" to="/">
+              <Link className="link home-link" to="/">
+                <img src="/favicon.png" alt="" className="home-icon" />
                 {siteTitle}
               </Link>
             </div>
