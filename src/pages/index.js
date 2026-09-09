@@ -5,6 +5,7 @@ import Seo from '../components/seo';
 // import Bio from '../components/bio'; // 홈 화면에서 숨김 처리 — 복원하려면 주석 해제 후 아래 <Bio> 태그도 주석 해제
 import Post from '../models/post';
 
+import MainBanner from '../components/main-banner';
 import PostTabs from '../components/post-tabs';
 import { FIXED_CATEGORIES } from '../utils/categories';
 
@@ -19,6 +20,7 @@ function HomePage({ data, location }) {
   return (
     <Layout wide>
       <Seo pathname={location?.pathname} />
+      <MainBanner image="/jaime-main-banner.jpg" title="jai.me" />
       {/* <Bio author={author} language={language} /> */}
       {/* 홈 화면 프로필 섹션 숨김 처리 — 복원하려면 위 주석 해제 및 import Bio 주석도 해제 */}
       <PostTabs

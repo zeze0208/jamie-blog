@@ -4,7 +4,7 @@ import { navigate } from 'gatsby';
 import Layout from '../layout';
 import Seo from '../components/seo';
 import Post from '../models/post';
-import CategoryPageHeader from '../components/category-page-header';
+import MainBanner from '../components/main-banner';
 import PostTabs from '../components/post-tabs';
 import { CATEGORY_LABELS, CATEGORY_DESCRIPTIONS } from '../utils/categories';
 
@@ -31,13 +31,20 @@ function CategoryTemplate({ pageContext, location }) {
   return (
     <Layout wide>
       <Seo title="Posts" pathname={location?.pathname} />
-      <CategoryPageHeader
-        title={title}
-        subtitle={description || `${posts.length} posts`}
-      />
+      <MainBanner image="/jaime-main-banner.jpg" title={title} />
       {description && (
-        <p style={{ textAlign: 'center', color: 'var(--text-secondary-color, #888)', marginBottom: '8px', fontSize: '0.95rem' }}>
-          {posts.length} posts
+        <p
+          style={{
+            textAlign: 'center',
+            color: 'var(--text-secondary-color, #888)',
+            marginBottom: '8px',
+            fontSize: '10px',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+          }}
+        >
+          {description}
         </p>
       )}
       <PostTabs

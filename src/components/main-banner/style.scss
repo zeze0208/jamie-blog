@@ -1,26 +1,21 @@
 @use '../../styles/mixins'as *;
 @use '../../styles/variables'as *;
 
-// 권장 배너 이미지 사이즈: 1600x320px (가로:세로 = 5:1), 레티나 대응 시 3200x640px
+// /posts 카테고리 페이지 상단 헤더(제목+부제)와 높이를 맞춘 배너 영역 (고정 160px)
 .main-banner {
   width: 100%;
-  aspect-ratio: 5 / 1;
-  min-height: 120px;
+  height: 160px;
   border-radius: 12px;
   margin-bottom: 32px;
   background-color: var(--card-thumbnail-background-color);
-  background-image: linear-gradient(120deg, #415a77 0%, #1b263b 100%);
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
   background-position: center;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   position: relative;
-
-  @include sm {
-    min-height: 160px;
-  }
 
   .main-banner-overlay {
     display: flex;
