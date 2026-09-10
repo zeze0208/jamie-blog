@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { Link } from 'gatsby';
 import PostCardColumn from '../post-card-column';
 import { CATEGORY_LABELS } from '../../utils/categories';
 import './style.scss';
@@ -66,9 +67,11 @@ function PostTabs({ tabIndex, onChange, tabs, posts, showMoreButton }) {
             <div className="sidebar-title">태그</div>
             <ul className="sidebar-tag-list">
               {tagCounts.map(([tag, count]) => (
-                <li key={tag} className="sidebar-tag">
-                  <span className="sidebar-tag-label">#{tag}</span>
-                  <span className="sidebar-item-count">{count}</span>
+                <li key={tag}>
+                  <Link to={`/tags/${tag}`} className="sidebar-tag">
+                    <span className="sidebar-tag-label">#{tag}</span>
+                    <span className="sidebar-item-count">{count}</span>
+                  </Link>
                 </li>
               ))}
             </ul>

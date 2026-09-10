@@ -21,9 +21,9 @@
   }
 }
 
-// Extra large devices
-@mixin xl {
-  @media (min-width: #{$screen-xl-min}) {
+// Extra large devices (사이드바 폭을 원래대로 복원하는 지점)
+@mixin xxl {
+  @media (min-width: #{$screen-xxl-min}) {
     @content;
   }
 }

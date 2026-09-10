@@ -13,6 +13,14 @@
     align-items: flex-start;
   }
 
+  // 글 상세 페이지(has-toc)에서만, 우측 고정 목차가 들어설 자리를 미리 비워둔다.
+  // 이 여백이 없으면 본문이 뷰포트 폭 대부분(대략 1080~2020px)에서 목차와 겹친다.
+  &.has-toc {
+    @include lg {
+      padding-right: calc(#{$toc-width} + #{$toc-gutter-gap});
+    }
+  }
+
   .post-sidebar {
     width: 100%;
     flex-shrink: 0;
@@ -22,12 +30,18 @@
     overflow-x: auto;
 
     @include lg {
-      width: $sidebar-width;
+      // 목차 자리를 확보해야 하는 구간에서는 카테고리/태그 사이드바를 먼저 좁혀
+      // 본문이 과도하게 줄어들지 않도록 한다 (xxl부터 원래 폭으로 복원)
+      width: $sidebar-width-narrow;
       flex-direction: column;
       gap: 48px;
       position: sticky;
       top: 20px;
       overflow-x: visible;
+    }
+
+    @include xxl {
+      width: $sidebar-width;
     }
 
     .sidebar-section {
@@ -113,28 +127,44 @@
         display: flex;
         flex-wrap: wrap;
         gap: 6px;
+      }
 
-        .sidebar-tag {
-          display: inline-flex;
-          align-items: center;
-          gap: 4px;
-          padding: 5px 10px;
-          font-size: 12px;
-          font-weight: 500;
-          color: var(--tag-badge-text-color);
-          background-color: var(--tag-badge-background-color);
-          border-radius: 999px;
-          white-space: nowrap;
+      .sidebar-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 5px 10px;
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--tag-badge-text-color);
+        background-color: var(--tag-badge-background-color);
+        border-radius: 999px;
+        white-space: nowrap;
+        text-decoration: none;
+        transition: all 150ms ease;
 
-          .sidebar-tag-label {
-            overflow: hidden;
-            text-overflow: ellipsis;
-          }
+        &:hover {
+          opacity: 0.8;
+        }
+
+        &.selected {
+          background-color: var(--sidebar-item-active-background-color);
+          color: var(--sidebar-item-active-text-color);
+          font-weight: 700;
 
           .sidebar-item-count {
-            font-size: 11px;
-            color: var(--sidebar-count-color);
+            color: var(--sidebar-item-active-text-color);
           }
+        }
+
+        .sidebar-tag-label {
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .sidebar-item-count {
+          font-size: 11px;
+          color: var(--sidebar-count-color);
         }
       }
     }
@@ -144,6 +174,7 @@
     flex: 1;
     min-width: 0;
     width: 100%;
+    padding: 0 10px;
     display: flex;
     justify-content: center;
 

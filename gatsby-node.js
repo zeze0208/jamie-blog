@@ -25,8 +25,10 @@ exports.createSchemaCustomization = ({ actions }) => {
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions;
   if (node.internal.type === `MarkdownRemark`) {
+    // 2026-09 URL 구조 변경: 글 경로를 jai.me.kr/글슬러그 에서 jai.me.kr/content/글슬러그 로 이동.
+    // 기존에 색인·공유된 URL은 static/_redirects 에서 301로 새 경로로 보낸다.
     const slug = createFilePath({ node, getNode, basePath: `content` });
-    createNodeField({ node, name: `slug`, value: slug });
+    createNodeField({ node, name: `slug`, value: `/content${slug}` });
   }
 };
 
@@ -81,6 +83,33 @@ const createPostsPages = ({ createPage, results }) => {
   });
 };
 
+const createTagPages = ({ createPage, results }) => {
+  const tagTemplate = require.resolve(`./src/templates/tag-template.js`);
+  const { edges } = results.data.allMarkdownRemark;
+
+  // 글에 달린 모든 태그(쉼표 구분 문자열)를 모아 태그별 페이지를 만든다.
+  const tagSet = new Set();
+  edges.forEach(({ node }) => {
+    (node.frontmatter.tags || '')
+      .split(',')
+      .map((tag) => tag.trim())
+      .filter(Boolean)
+      .forEach((tag) => tagSet.add(tag));
+  });
+
+  tagSet.forEach((currentTag) => {
+    createPage({
+      path: `/tags/${currentTag}`,
+      component: tagTemplate,
+      context: {
+        currentTag,
+        // 사이드바 카운트를 전체 기준으로 보여주기 위해 전체 글 목록을 전달 (카테고리 페이지와 동일한 방식)
+        edges,
+      },
+    });
+  });
+};
+
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions;
 
@@ -126,4 +155,5 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   createBlogPages({ createPage, results });
   createPostsPages({ createPage, results });
+  createTagPages({ createPage, results });
 };

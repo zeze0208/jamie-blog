@@ -2,6 +2,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import Layout from '../layout';
 import Seo from '../components/seo';
+import MainBanner from '../components/main-banner';
 import PostHeader from '../components/post-header';
 import PostNavigator from '../components/post-navigator';
 import PostSidebar from '../components/post-sidebar';
@@ -28,7 +29,9 @@ function BlogTemplate({ data }) {
         datePublished={data.cur?.frontmatter?.isoDate}
         author={curPost?.author}
       />
-      <div className="post-tabs-wrapper">
+      <MainBanner image="/jaime-main-banner.jpg" title={curPost?.title} />
+      {/* has-toc: 우측 고정 목차가 들어설 자리를 미리 비워 본문과 겹치지 않게 함 */}
+      <div className="post-tabs-wrapper has-toc">
         <PostSidebar posts={allPosts} activeCategories={curPost.categories} />
         <div className="post-tabs-content">
           <div style={{ width: '100%' }}>

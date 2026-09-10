@@ -1,0 +1,31 @@
+# 2026-09 URL 구조 변경: 글 경로가 /content/{slug} 아래로 이동됨에 따른 301 리다이렉트.
+# 검색엔진 색인과 기존에 공유된 링크가 깨지지 않도록, 이미 배포돼 있던 14개 글의 예전 경로를 새 경로로 보낸다.
+# 앞으로 새로 쓰는 글은 처음부터 /content/{slug}로 생성되므로 이 목록에 추가할 필요 없음.
+/art-business-plan-1                       /content/art-business-plan-1/                     301
+/art-business-plan-1/*                     /content/art-business-plan-1/                     301
+/bd01                                      /content/bd01/                                    301
+/bd01/*                                    /content/bd01/                                    301
+/feedback                                  /content/feedback/                                301
+/feedback/*                                /content/feedback/                                301
+/gnuboard-spam-incident-response           /content/gnuboard-spam-incident-response/         301
+/gnuboard-spam-incident-response/*         /content/gnuboard-spam-incident-response/         301
+/hacked-hp1                                /content/hacked-hp1/                              301
+/hacked-hp1/*                              /content/hacked-hp1/                              301
+/kopis-calculator-1                        /content/kopis-calculator-1/                      301
+/kopis-calculator-1/*                      /content/kopis-calculator-1/                      301
+/kopis-open-api-guide-1                    /content/kopis-open-api-guide-1/                  301
+/kopis-open-api-guide-1/*                  /content/kopis-open-api-guide-1/                  301
+/kopis-open-api-guide-2                    /content/kopis-open-api-guide-2/                  301
+/kopis-open-api-guide-2/*                  /content/kopis-open-api-guide-2/                  301
+/kopis-prompt-award-ticket-analysis        /content/kopis-prompt-award-ticket-analysis/      301
+/kopis-prompt-award-ticket-analysis/*      /content/kopis-prompt-award-ticket-analysis/      301
+/kopis-prompt-top10-producer               /content/kopis-prompt-top10-producer/             301
+/kopis-prompt-top10-producer/*             /content/kopis-prompt-top10-producer/             301
+/mad-diary01                               /content/mad-diary01/                             301
+/mad-diary01/*                             /content/mad-diary01/                             301
+/no-single-right-answer                    /content/no-single-right-answer/                  301
+/no-single-right-answer/*                  /content/no-single-right-answer/                  301
+/vibe-coding-coupon                        /content/vibe-coding-coupon/                      301
+/vibe-coding-coupon/*                      /content/vibe-coding-coupon/                      301
+/who-broke-the-piano                       /content/who-broke-the-piano/                     301
+/who-broke-the-piano/*                     /content/who-broke-the-piano/                     301
