@@ -46,6 +46,7 @@
 
     .sidebar-section {
       min-width: 220px;
+      margin-top: 40px;
 
       @include lg {
         min-width: 0;

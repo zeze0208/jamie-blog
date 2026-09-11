@@ -37,7 +37,7 @@ function CategoryTemplate({ pageContext, location }) {
           style={{
             textAlign: 'center',
             color: 'var(--text-secondary-color, #888)',
-            marginBottom: '8px',
+            marginBottom: '16px',
             fontSize: '10px',
             whiteSpace: 'nowrap',
             overflow: 'hidden',
