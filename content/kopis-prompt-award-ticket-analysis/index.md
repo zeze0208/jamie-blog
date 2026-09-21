@@ -4,7 +4,7 @@ title: "KOPIS 프롬프트 공유 - 수상작 데이터로 흥행 패턴 분석�
 subtitle: "상을 받으면 작품이 더 잘 될까? 수상작 데이터 살펴보기"
 date: '2026-08-07 00:00:00'
 author: jaime
-tags: "KOPIS, 프롬프트, 데이터분석, 공연API, 수상작, 흥행분석, 공연데이터, 코피스, 예술데이터"
+tags: "cto"
 categories: cto
 ---
 

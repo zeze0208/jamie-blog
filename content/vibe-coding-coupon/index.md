@@ -4,7 +4,7 @@ title: "개발팀에서 2주 걸린다고 한 쿠폰기능, 기획자가 이틀�
 subtitle: "샤라웃 투 클로드코드, 바이브코딩 만세"
 date: '2026-06-12 00:00:00'
 author: jaime
-tags: "바이브코딩, 클로드코드, AI기획, 비개발자"
+tags: "cto"
 categories: cto
 ---
 

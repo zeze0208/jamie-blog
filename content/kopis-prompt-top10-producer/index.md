@@ -4,7 +4,7 @@ title: "KOPIS 프롬프트 공유 - 상반기 열일한 제작사 top10 추출�
 subtitle: "데이터 추출을 위한 단계별 프롬프트 가이드 공유"
 date: '2026-07-31 00:00:00'
 author: jaime
-tags: "KOPIS, 프롬프트, 데이터분석, 공연API, 공연데이터, 예술데이터, 코피스, 데이터프롬프트"
+tags: "cto"
 categories: cto
 ---
 

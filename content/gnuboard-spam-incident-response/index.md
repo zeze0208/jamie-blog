@@ -4,7 +4,7 @@ title: "회사 홈페이지가 해킹당했다(개발자ver.) - 그누보드 게
 subtitle: ""
 date: '2026-08-17 00:00:00'
 author: jaime
-tags: "그누보드, PHP, Nginx, 웹보안, SEO스팸, 침해대응, 서버운영"
+tags: "cto"
 categories: cto
 ---
 
