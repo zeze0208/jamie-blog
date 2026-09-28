@@ -4,8 +4,8 @@ title: "실무를 모르는 리더는 되고 싶지 않아 - 고통과 분노의
 subtitle: "실무를 잘 해본 경험이 없는 리더는 자격이 없다, 정말로.."
 date: '2026-08-20 00:00:00'
 author: jaime
-tags: "etc"
-categories: etc
+tags: "work"
+categories: work
 ---
 
 
