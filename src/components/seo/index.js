@@ -5,7 +5,8 @@ import { Helmet } from 'react-helmet';
 // pathname, isArticle, datePublished, author, image를 넘기면
 // 글 단위 canonical/OG/JSON-LD(Article)까지 채워진다.
 // 별도로 넘기지 않으면 사이트 기본값으로 채워지므로 기존 <Seo title="..." /> 호출부는 그대로 동작한다.
-function Seo({ title, description, pathname, isArticle, datePublished, author, image }) {
+// noindex를 넘기면 검색결과에 노출되지 않도록 표시한다 (태그·카테고리 목록 페이지용).
+function Seo({ title, description, pathname, isArticle, datePublished, author, image, noindex }) {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -68,6 +69,7 @@ function Seo({ title, description, pathname, isArticle, datePublished, author, i
     >
       <link rel="canonical" href={canonicalUrl} />
       <meta name="description" content={metaDescription} />
+      {noindex && <meta name="robots" content="noindex, follow" />}
       {verification?.google && (
         <meta name="google-site-verification" content={verification.google} />
       )}

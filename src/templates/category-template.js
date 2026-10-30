@@ -30,7 +30,7 @@ function CategoryTemplate({ pageContext, location }) {
 
   return (
     <Layout wide>
-      <Seo title="Posts" pathname={location?.pathname} />
+      <Seo title="Posts" pathname={location?.pathname} noindex />
       <MainBanner image="/jaime-main-banner.jpg" title={title} />
       {description && (
         <p

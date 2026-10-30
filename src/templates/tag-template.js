@@ -20,7 +20,7 @@ function TagTemplate({ pageContext, location }) {
 
   return (
     <Layout wide>
-      <Seo title={`#${currentTag}`} pathname={location?.pathname} />
+      <Seo title={`#${currentTag}`} pathname={location?.pathname} noindex />
       <MainBanner image="/jaime-main-banner.jpg" title={`#${currentTag}`} />
       <div className="post-tabs-wrapper">
         <PostSidebar posts={allPosts} activeTags={[currentTag]} />

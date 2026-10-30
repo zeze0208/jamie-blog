@@ -27,6 +27,8 @@ module.exports = {
         env: {
           production: {
             policy: [{ userAgent: '*' }],
+            // 사이트맵 위치를 검색엔진에 알려준다 (gatsby-plugin-sitemap 기본 출력 위치와 일치해야 함)
+            sitemap: 'https://jai.me.kr/sitemap/sitemap-index.xml',
           },
           'branch-deploy': {
             policy: [{ userAgent: '*', disallow: ['/'] }],
@@ -123,7 +125,15 @@ module.exports = {
     },
     `gatsby-theme-material-ui`,
     `gatsby-transformer-sharp`,
-    `gatsby-plugin-advanced-sitemap`,
+    {
+      // 사이트맵: /sitemap/sitemap-index.xml 로 생성된다.
+      // 글 목록만 있는 태그·카테고리 페이지는 검색엔진이 '가치 낮은 페이지'로 보고 색인하지 않으므로
+      // 사이트맵에서 빼서 실제 글에 크롤링이 집중되도록 한다. (해당 페이지들은 noindex 처리도 되어 있음)
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        excludes: ['/tags/**', '/posts', '/posts/**', '/offline-plugin-app-shell-fallback'],
+      },
+    },
     `gatsby-plugin-sharp`,
     `gatsby-plugin-image`,
     `gatsby-plugin-offline`,

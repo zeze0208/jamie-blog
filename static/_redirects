@@ -29,3 +29,8 @@
 /vibe-coding-coupon/*                      /content/vibe-coding-coupon/                      301
 /who-broke-the-piano                       /content/who-broke-the-piano/                     301
 /who-broke-the-piano/*                     /content/who-broke-the-piano/                     301
+
+# 2026-10 사이트맵 플러그인 교체(gatsby-plugin-advanced-sitemap → gatsby-plugin-sitemap)에 따른 리다이렉트.
+# Search Console·네이버에 예전 주소(/sitemap.xml)로 제출된 사이트맵도 새 위치로 연결되도록 한다.
+/sitemap.xml                               /sitemap/sitemap-index.xml                        301
+/sitemap-pages.xml                         /sitemap/sitemap-0.xml                            301
